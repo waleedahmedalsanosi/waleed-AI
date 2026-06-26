@@ -32,11 +32,19 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "04-prd.md" "05-sow.md"; do
+for F in "05-prd.md" "06-sow.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
 done
+# Gate: handoff should only run after a confirmed Proceed from CEO review
+if [ -f "$SESSION/08-ceo-review.md" ]; then
+  OUTCOME=$(grep "^Outcome:" "$SESSION/08-ceo-review.md" | tail -1 | sed 's/Outcome: //')
+  if [ "$OUTCOME" != "Proceed" ]; then
+    echo "WARNING: CEO review outcome is '$OUTCOME' — handoff is normally only generated after a confirmed Proceed."
+    echo "If conditions have since been met and Samir has approved, continue. Otherwise run /followup first."
+  fi
+fi
 echo "SESSION: $SESSION"
 ```
 
@@ -193,8 +201,8 @@ Assign owners and get answers in the first week.
 |----------|----------|-----------------|
 | Founder Brief | `{session}/01-intake.md` | Raw context from the founder meeting |
 | Evaluation Report | `{session}/02-evaluate.md` | Dreamy's assessment of the opportunity |
-| PRD | `{session}/04-prd.md` | Full product requirements with user stories |
-| SOW | `{session}/05-sow.md` | Commercial scope and equity terms |
+| PRD | `{session}/05-prd.md` | Full product requirements with user stories |
+| SOW | `{session}/06-sow.md` | Commercial scope and equity terms |
 
 ---
 

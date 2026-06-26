@@ -13,7 +13,7 @@ allowed-tools:
 
 ## When to invoke this skill
 
-Run after `/ceo-review`. Reads Samir's decision from `07-ceo-review.md` and produces
+Run after `/ceo-review`. Reads Samir's decision from `08-ceo-review.md` and produces
 the appropriate follow-up correspondence to the founder at `10-followup.md`.
 
 The message branches on Samir's outcome:
@@ -34,13 +34,13 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-if [ ! -f "$SESSION/07-ceo-review.md" ]; then
-  echo "ERROR: 07-ceo-review.md not found — run /ceo-review first"; exit 1
+if [ ! -f "$SESSION/08-ceo-review.md" ]; then
+  echo "ERROR: 08-ceo-review.md not found — run /ceo-review first"; exit 1
 fi
 # Read the outcome field from the last line of ceo-review.md
-OUTCOME=$(grep "^Outcome:" "$SESSION/07-ceo-review.md" | tail -1 | sed 's/Outcome: //')
+OUTCOME=$(grep "^Outcome:" "$SESSION/08-ceo-review.md" | tail -1 | sed 's/Outcome: //')
 if [ -z "$OUTCOME" ]; then
-  echo "ERROR: No 'Outcome:' line found in 07-ceo-review.md — re-run /ceo-review"; exit 1
+  echo "ERROR: No 'Outcome:' line found in 08-ceo-review.md — re-run /ceo-review"; exit 1
 fi
 echo "SESSION: $SESSION"
 echo "OUTCOME: $OUTCOME"
@@ -54,7 +54,7 @@ You are running the `/followup` skill for Waleed Al-Sanosi, PM at Dreamy.
 
 ### Step 1: Read inputs
 
-1. Read `07-ceo-review.md` from the current session.
+1. Read `08-ceo-review.md` from the current session.
 2. Note the `OUTCOME` from the bash preamble — this determines the letter tone.
 3. Also read `01-intake.md` for founder name and company name.
 
@@ -165,7 +165,13 @@ dreamybuilders.com
 {If Pass:}
 **Re-engagement trigger:** {Under what specific circumstances would Dreamy reconsider?
 Or: "Not applicable — fundamental mismatch."}
+
+Outcome: {Proceed / Conditional / Pass}
 ```
+
+**CRITICAL:** The file MUST end with the bare line `Outcome: {value}` (no bold, no markdown).
+This is read by `/brief` via `grep "^Outcome:"` to determine meeting context.
+Use exactly one of: `Outcome: Proceed`, `Outcome: Conditional`, or `Outcome: Pass`.
 
 ---
 

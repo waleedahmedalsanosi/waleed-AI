@@ -13,7 +13,7 @@ allowed-tools:
 ## When to invoke this skill
 
 Run after `/bop`. Reads the Founder Brief, Evaluation Report, and Business Opportunity
-Profile, then produces a bilingual Product Requirements Document (PRD) at `04-prd.md`.
+Profile, then produces a bilingual Product Requirements Document (PRD) at `05-prd.md`.
 
 The PRD defines what will be built — features, user stories, and acceptance criteria.
 It is the contract between Dreamy and the founder on product scope.
@@ -52,12 +52,12 @@ Read from the current session:
 2. `02-evaluate.md` — Evaluation Report (technical feasibility, build complexity)
 3. `03-bop.md` — Business Opportunity Profile (MVP scope estimate, Dreamy's technical angle)
 
-### Step 2: Write 04-prd.md
+### Step 2: Write 05-prd.md
 
 The PRD has two sections: English (primary, detailed) followed by Arabic (executive summary
 for the founder). The Arabic section uses RTL formatting.
 
-Write to `{SESSION}/04-prd.md`:
+Write to `{SESSION}/05-prd.md`:
 
 ```markdown
 # Product Requirements Document
@@ -227,7 +227,7 @@ After writing the file, print:
 ```
 /prd complete.
 
-File: {session path}/04-prd.md
+File: {session path}/05-prd.md
 
 Next: run /sow to define the commercial scope
 ```

@@ -41,6 +41,14 @@ if [ "$FIRST_LINE" != "# Founder Brief" ]; then
 fi
 echo "SESSION: $SESSION"
 echo "INTAKE: OK"
+# Check for additional meeting notes
+MEETINGS_DIR="$SESSION/meetings"
+if [ -d "$MEETINGS_DIR" ] && [ "$(ls -A "$MEETINGS_DIR" 2>/dev/null)" ]; then
+  MEETING_COUNT=$(ls "$MEETINGS_DIR"/*.md 2>/dev/null | wc -l | tr -d ' ')
+  echo "MEETINGS: $MEETING_COUNT additional meeting note(s) found — will be incorporated into evaluation"
+else
+  echo "MEETINGS: none"
+fi
 ```
 
 ---
@@ -53,6 +61,7 @@ You are running the `/evaluate` skill for Waleed Al-Sanosi, PM at Dreamy.
 
 1. Read `01-intake.md` from the current session (path from SESSION in preamble).
 2. Read `~/.claude/skills/waleed-ai/lib/evaluation-framework.md` — this is the scoring rubric.
+3. If `MEETINGS` output from the preamble shows additional meeting notes, read each file in `{SESSION}/meetings/` and incorporate that information into scoring. Meeting notes update your view of the founder — they do not replace the intake. If a meeting resolves a red flag from intake (e.g., company is now incorporated), that should raise the relevant sub-criterion score and be noted explicitly.
 
 ### Step 2: Score each category
 
@@ -67,7 +76,8 @@ Work through each of the 6 categories in the framework. For each:
 
 After computing the TOTAL:
 - If TOTAL < 30, you MUST include this line in the output:
-  `WARNING: Sparse data — score below 30. Consider supplementing with a follow-up call before proceeding.`
+  `WARNING: Score below 30 — falls in Pass range. Either the intake data is too sparse to evaluate fairly, or this is a genuine Pass. Do not proceed without a follow-up call to fill data gaps.`
+- If TOTAL is 30–54 (Watch range), note in the recommendation that Watch means "do not proceed now — revisit if conditions improve" — it is not an active engagement.
 
 ### Step 4: Determine Recommendation
 

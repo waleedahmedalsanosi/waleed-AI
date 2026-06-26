@@ -63,9 +63,9 @@ Rules:
 - Closing: "مع خالص التحيات،\nوليد الأحمد السنوسي\nDreamy"
 - Do not make equity or partnership commitments in this message — this is first contact
 
-### Step 3: Write 09-outreach.md
+### Step 3: Write 04-outreach.md
 
-Write to `{SESSION}/09-outreach.md`:
+Write to `{SESSION}/04-outreach.md`:
 
 ```markdown
 # First Outreach Message
@@ -141,7 +141,7 @@ After writing the file, print:
 ```
 /outreach complete.
 
-File: {session path}/09-outreach.md
+File: {session path}/04-outreach.md
 
 The Arabic section above is copy-paste ready for WhatsApp.
 ```

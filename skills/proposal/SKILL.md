@@ -30,7 +30,7 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "03-bop.md" "05-sow.md"; do
+for F in "03-bop.md" "06-sow.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
@@ -48,15 +48,15 @@ You are running the `/proposal` skill for Waleed Al-Sanosi, PM at Dreamy.
 
 Read from the current session:
 1. `03-bop.md` — Business Opportunity Profile (company context, founder, strategic upside)
-2. `05-sow.md` — Scope of Work (deliverables, timeline, equity terms)
+2. `06-sow.md` — Scope of Work (deliverables, timeline, equity terms)
 
-### Step 2: Write 06-proposal.md
+### Step 2: Write 07-proposal.md
 
 The proposal is a formal letter — bilingual, Arabic first (RTL), English second.
 Register: Modern Standard Arabic (MSA), formal business correspondence.
 The Arabic section should be copy-paste ready for WhatsApp or email.
 
-Write to `{SESSION}/06-proposal.md`:
+Write to `{SESSION}/07-proposal.md`:
 
 ```markdown
 # Partnership Proposal
@@ -178,7 +178,7 @@ After writing the file, print:
 ```
 /proposal complete.
 
-File: {session path}/06-proposal.md
+File: {session path}/07-proposal.md
 
 ⚠ Reminder: Fill in the equity percentage ([___]%) before sending.
 

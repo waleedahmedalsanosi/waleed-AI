@@ -14,7 +14,7 @@ allowed-tools:
 ## When to invoke this skill
 
 Run after `/bop` (and optionally `/evaluate`). Produces a concise executive brief
-for Samir Al-Rashidi (Dreamy CEO) at `07-ceo-review.md`.
+for Samir Al-Rashidi (Dreamy CEO) at `08-ceo-review.md`.
 
 Samir needs to make one decision: Proceed / Conditional / Pass. The document must
 give him everything he needs in under 3 minutes of reading. No filler.
@@ -58,9 +58,9 @@ Read from the current session:
 1. `02-evaluate.md` — Evaluation Report (scores, strengths, risks, recommendation)
 2. `03-bop.md` — Business Opportunity Profile (market, founder, Dreamy upside)
 
-### Step 2: Write 07-ceo-review.md
+### Step 2: Write 08-ceo-review.md
 
-Write to `{SESSION}/07-ceo-review.md`:
+Write to `{SESSION}/08-ceo-review.md`:
 
 ```markdown
 # CEO Review Brief
@@ -130,7 +130,7 @@ in one direct sentence]. No hedging. Write this paragraph last.}
 ## What This Looks Like for Dreamy
 
 **Build scope:** {High-level: "2-person team, 6-month build, mobile-first" etc.}
-**Equity ask:** [___]% (Waleed's proposed stake — confirm before sending)
+**Waleed's equity recommendation:** {State a specific percentage range, e.g. "30–35%". Base it on engagement weight: full technical co-founding with 100% technical lift = 25–40%; shared build = 15–25%. Do NOT leave this blank — Samir needs a number to react to, not a placeholder.}
 **Strategic upside:** {Why this is a good portfolio bet for Dreamy, in 1–2 sentences}
 **Comparable:** {If there's an analogy to something Dreamy has done or knows — optional}
 
@@ -166,7 +166,7 @@ After writing the file, print:
 ```
 /ceo-review complete.
 
-File: {session path}/07-ceo-review.md
+File: {session path}/08-ceo-review.md
 Recommendation: {Proceed / Conditional / Pass}
 
 ⚠ Reminder: Fill in the equity percentage before sharing with Samir.

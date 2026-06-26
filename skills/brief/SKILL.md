@@ -38,7 +38,7 @@ for F in "01-intake.md" "10-followup.md"; do
   fi
 done
 # Extract outcome from followup for context
-OUTCOME=$(grep "^\*\*Outcome:\*\*" "$SESSION/10-followup.md" | head -1 | sed 's/\*\*Outcome:\*\* //')
+OUTCOME=$(grep "^Outcome:" "$SESSION/10-followup.md" | tail -1 | sed 's/Outcome: //')
 echo "SESSION: $SESSION"
 echo "OUTCOME: $OUTCOME"
 ```
