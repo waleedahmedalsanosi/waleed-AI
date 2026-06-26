@@ -12,9 +12,12 @@ allowed-tools:
 
 ## When to invoke this skill
 
-Run after `/intake`. Reads the structured Founder Brief (`01-intake.md`) and the
-evaluation framework rubric, then produces a scored 100-point assessment at
-`02-evaluate.md` with a Proceed / Conditional / Pass recommendation.
+Run after `/intake` (and optionally `/market`). Reads the structured Founder Brief
+(`01-intake.md`) and the evaluation framework rubric, then produces a scored 100-point
+assessment at `03-evaluate.md` with a Proceed / Conditional / Watch / Pass recommendation.
+
+If `/market` was run first, also reads `02-market.md` to calibrate the Market
+scoring category with external research data.
 
 Never run this on a raw transcript. Run it on the structured brief from `/intake`.
 
@@ -49,6 +52,12 @@ if [ -d "$MEETINGS_DIR" ] && [ "$(ls -A "$MEETINGS_DIR" 2>/dev/null)" ]; then
 else
   echo "MEETINGS: none"
 fi
+# Check for market analysis from /market skill
+if [ -f "$SESSION/02-market.md" ]; then
+  echo "MARKET: market analysis found — will be incorporated into Market scoring"
+else
+  echo "MARKET: none — scoring Market category from intake data only"
+fi
 ```
 
 ---
@@ -62,6 +71,7 @@ You are running the `/evaluate` skill for Waleed Al-Sanosi, PM at Dreamy.
 1. Read `01-intake.md` from the current session (path from SESSION in preamble).
 2. Read `~/.claude/skills/waleed-ai/lib/evaluation-framework.md` — this is the scoring rubric.
 3. If `MEETINGS` output from the preamble shows additional meeting notes, read each file in `{SESSION}/meetings/` and incorporate that information into scoring. Meeting notes update your view of the founder — they do not replace the intake. If a meeting resolves a red flag from intake (e.g., company is now incorporated), that should raise the relevant sub-criterion score and be noted explicitly.
+4. If `MARKET` output shows a market analysis was found, read `02-market.md`. Use the "Summary for /evaluate" section at the end to calibrate the **Market** scoring category (sub-criteria: Market Size, Market Timing, Regional Dynamics). Market research supplements intake evidence — do not override what the founder said with web data, but use the research to fill gaps and corroborate claims.
 
 ### Step 2: Score each category
 
@@ -89,9 +99,9 @@ Use the scoring interpretation table from the framework:
 
 For Conditional or Watch: list 2–4 specific conditions or gaps that must be addressed.
 
-### Step 5: Write 02-evaluate.md
+### Step 5: Write 03-evaluate.md
 
-Write to `{SESSION}/02-evaluate.md`:
+Write to `{SESSION}/03-evaluate.md`:
 
 ```markdown
 # Evaluation Report
@@ -213,7 +223,7 @@ After writing the file, print:
 
 Score: {X}/100
 Recommendation: {Proceed / Conditional / Watch / Pass}
-File: {session path}/02-evaluate.md
+File: {session path}/03-evaluate.md
 
 Next: run /bop
 ```

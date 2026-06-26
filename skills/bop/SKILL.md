@@ -29,7 +29,7 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "01-intake.md" "02-evaluate.md"; do
+for F in "01-intake.md" "03-evaluate.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
@@ -47,15 +47,15 @@ You are running the `/bop` skill for Waleed Al-Sanosi, PM at Dreamy.
 
 Read both files from the current session:
 1. `01-intake.md` — the Founder Brief
-2. `02-evaluate.md` — the Evaluation Report
+2. `03-evaluate.md` — the Evaluation Report
 
-### Step 2: Write 03-bop.md
+### Step 2: Write 04-bop.md
 
 The BOP is a tight, decision-ready document. No padding. It answers:
 what is this opportunity, why does it matter for MENA, what are the risks, and
 what is Dreamy's role and upside.
 
-Write to `{SESSION}/03-bop.md`:
+Write to `{SESSION}/04-bop.md`:
 
 ```markdown
 # Business Opportunity Profile
@@ -141,7 +141,7 @@ This paragraph should work as a standalone pitch to Samir. Write it last.}
 
 **Score:** {X}/100 | **Recommendation:** {Proceed / Conditional / Watch / Pass}
 
-{Copy the Recommendation paragraph verbatim from 02-evaluate.md.}
+{Copy the Recommendation paragraph verbatim from 03-evaluate.md.}
 
 ---
 
@@ -160,7 +160,7 @@ After writing the file, print:
 ```
 /bop complete.
 
-File: {session path}/03-bop.md
+File: {session path}/04-bop.md
 
 Next: run /prd (if Proceed or Conditional) or /ceo-review (to brief Samir)
 ```

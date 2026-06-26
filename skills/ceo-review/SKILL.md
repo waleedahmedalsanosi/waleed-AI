@@ -14,7 +14,7 @@ allowed-tools:
 ## When to invoke this skill
 
 Run after `/bop` (and optionally `/evaluate`). Produces a concise executive brief
-for Samir Al-Rashidi (Dreamy CEO) at `08-ceo-review.md`.
+for Samir Al-Rashidi (Dreamy CEO) at `09-ceo-review.md`.
 
 Samir needs to make one decision: Proceed / Conditional / Pass. The document must
 give him everything he needs in under 3 minutes of reading. No filler.
@@ -32,7 +32,7 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "02-evaluate.md" "03-bop.md"; do
+for F in "03-evaluate.md" "04-bop.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
@@ -55,12 +55,12 @@ Write for Samir, not for the founder. No soft language. No padding. Direct.
 ### Step 1: Read inputs
 
 Read from the current session:
-1. `02-evaluate.md` — Evaluation Report (scores, strengths, risks, recommendation)
-2. `03-bop.md` — Business Opportunity Profile (market, founder, Dreamy upside)
+1. `03-evaluate.md` — Evaluation Report (scores, strengths, risks, recommendation)
+2. `04-bop.md` — Business Opportunity Profile (market, founder, Dreamy upside)
 
-### Step 2: Write 08-ceo-review.md
+### Step 2: Write 09-ceo-review.md
 
-Write to `{SESSION}/08-ceo-review.md`:
+Write to `{SESSION}/09-ceo-review.md`:
 
 ```markdown
 # CEO Review Brief
@@ -166,7 +166,7 @@ After writing the file, print:
 ```
 /ceo-review complete.
 
-File: {session path}/08-ceo-review.md
+File: {session path}/09-ceo-review.md
 Recommendation: {Proceed / Conditional / Pass}
 
 ⚠ Reminder: Fill in the equity percentage before sharing with Samir.

@@ -12,7 +12,7 @@ allowed-tools:
 
 ## When to invoke this skill
 
-Run after `/prd` and `/sow`. Produces a founder-facing review package at `09-client-review.md`
+Run after `/prd` and `/sow`. Produces a founder-facing review package at `10-client-review.md`
 that summarizes what Dreamy is proposing to build, the agreed scope, and what the founder
 needs to confirm before work begins.
 
@@ -31,7 +31,7 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "05-prd.md" "06-sow.md"; do
+for F in "06-prd.md" "07-sow.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
@@ -53,12 +53,12 @@ The audience is the founder. They may not be technical. The document must be:
 ### Step 1: Read inputs
 
 Read from the current session:
-1. `05-prd.md` — Product Requirements Document
-2. `06-sow.md` — Scope of Work
+1. `06-prd.md` — Product Requirements Document
+2. `07-sow.md` — Scope of Work
 
-### Step 2: Write 09-client-review.md
+### Step 2: Write 10-client-review.md
 
-Write to `{SESSION}/09-client-review.md`:
+Write to `{SESSION}/10-client-review.md`:
 
 ```markdown
 # Client Review Package
@@ -195,7 +195,7 @@ After writing the file, print:
 ```
 /client-review complete.
 
-File: {session path}/09-client-review.md
+File: {session path}/10-client-review.md
 
 ⚠ Reminder: Fill in equity percentage before sharing with founder.
 ```

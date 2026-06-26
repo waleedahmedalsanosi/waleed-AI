@@ -161,8 +161,8 @@ If nothing materially new: say so explicitly.}
 
 ## Conditions Update
 
-{For each condition listed in `10-followup.md` (if it exists), or the conditions from
-`02-evaluate.md`, state the current status:}
+{For each condition listed in `11-followup.md` (if it exists), or the conditions from
+`03-evaluate.md`, state the current status:}
 
 | Condition | Status | Notes |
 |-----------|--------|-------|

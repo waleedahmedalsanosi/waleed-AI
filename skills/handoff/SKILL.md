@@ -14,7 +14,7 @@ allowed-tools:
 ## When to invoke this skill
 
 Run after `/prd` and `/sow` are finalized and the partnership is confirmed.
-Produces a technical handoff document for the Dreamy engineering team at `12-handoff.md`.
+Produces a technical handoff document for the Dreamy engineering team at `13-handoff.md`.
 
 Audience: Dreamy's developers. Format: English only (internal). Structured with epics,
 features, and acceptance criteria derived from the approved PRD and SOW.
@@ -32,14 +32,14 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "05-prd.md" "06-sow.md"; do
+for F in "06-prd.md" "07-sow.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
 done
 # Gate: handoff should only run after a confirmed Proceed from CEO review
-if [ -f "$SESSION/08-ceo-review.md" ]; then
-  OUTCOME=$(grep "^Outcome:" "$SESSION/08-ceo-review.md" | tail -1 | sed 's/Outcome: //')
+if [ -f "$SESSION/09-ceo-review.md" ]; then
+  OUTCOME=$(grep "^Outcome:" "$SESSION/09-ceo-review.md" | tail -1 | sed 's/Outcome: //')
   if [ "$OUTCOME" != "Proceed" ]; then
     echo "WARNING: CEO review outcome is '$OUTCOME' — handoff is normally only generated after a confirmed Proceed."
     echo "If conditions have since been met and Samir has approved, continue. Otherwise run /followup first."
@@ -66,12 +66,12 @@ Write for a senior developer who's context-free on this project.
 ### Step 1: Read inputs
 
 Read from the current session:
-1. `04-prd.md` — Product Requirements Document (features, user stories, technical requirements)
-2. `05-sow.md` — Scope of Work (deliverables, timeline, milestones)
+1. `06-prd.md` — Product Requirements Document (features, user stories, technical requirements)
+2. `07-sow.md` — Scope of Work (deliverables, timeline, milestones)
 
-### Step 2: Write 12-handoff.md
+### Step 2: Write 13-handoff.md
 
-Write to `{SESSION}/12-handoff.md`:
+Write to `{SESSION}/13-handoff.md`:
 
 ```markdown
 # Technical Handoff
@@ -200,9 +200,9 @@ Assign owners and get answers in the first week.
 | Document | Location | What it contains |
 |----------|----------|-----------------|
 | Founder Brief | `{session}/01-intake.md` | Raw context from the founder meeting |
-| Evaluation Report | `{session}/02-evaluate.md` | Dreamy's assessment of the opportunity |
-| PRD | `{session}/05-prd.md` | Full product requirements with user stories |
-| SOW | `{session}/06-sow.md` | Commercial scope and equity terms |
+| Evaluation Report | `{session}/03-evaluate.md` | Dreamy's assessment of the opportunity |
+| PRD | `{session}/06-prd.md` | Full product requirements with user stories |
+| SOW | `{session}/07-sow.md` | Commercial scope and equity terms |
 
 ---
 
@@ -218,21 +218,22 @@ After writing the file, print:
 ```
 /handoff complete.
 
-File: {session path}/12-handoff.md
+File: {session path}/13-handoff.md
 
-All 12 session files are now complete:
-  01-intake.md      → Founder Brief
-  02-evaluate.md    → Evaluation Report ({score}/100, {Recommendation})
-  03-bop.md         → Business Opportunity Profile
-  04-prd.md         → Product Requirements Document
-  05-sow.md         → Scope of Work
-  06-proposal.md    → Partnership Proposal
-  07-ceo-review.md  → CEO Review Brief (Samir)
-  08-client-review.md → Client Review Package
-  09-outreach.md    → First Outreach (WhatsApp)
-  10-followup.md    → Follow-up Correspondence
-  11-brief.md       → Meeting Prep Brief
-  12-handoff.md     → Technical Handoff
+All 13 session files are now complete:
+  01-intake.md        → Founder Brief
+  02-market.md        → Market & Competitor Analysis (if /market was run)
+  03-evaluate.md      → Evaluation Report ({score}/100, {Recommendation})
+  04-bop.md           → Business Opportunity Profile
+  05-outreach.md      → First Outreach (WhatsApp)
+  06-prd.md           → Product Requirements Document
+  07-sow.md           → Scope of Work
+  08-proposal.md      → Partnership Proposal
+  09-ceo-review.md    → CEO Review Brief (Samir)
+  10-client-review.md → Client Review Package
+  11-followup.md      → Follow-up Correspondence
+  12-brief.md         → Meeting Prep Brief
+  13-handoff.md       → Technical Handoff
 
 Cycle complete.
 ```

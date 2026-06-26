@@ -1,8 +1,9 @@
 ---
 name: waleed-ai
-description: "Waleed AI — 13-skill PM automation suite for Dreamy partnership evaluation cycles"
+description: "Waleed AI — 14-skill PM automation suite for Dreamy partnership evaluation cycles"
 triggers:
   - intake
+  - market
   - evaluate
   - bop
   - outreach
@@ -25,8 +26,8 @@ allowed-tools:
 ## Waleed AI — Skill Router
 
 PM automation suite for Dreamy (dreamybuilders.com) partnership evaluation cycles.
-13 sequential skills: `/intake` → `/evaluate` → `/bop` → `/outreach` → `/prd` → `/sow` →
-`/proposal` → `/ceo-review` → `/client-review` → `/followup` → `/brief` → `/handoff`
+14 sequential skills: `/intake` → `/market` → `/evaluate` → `/bop` → `/outreach` → `/prd` →
+`/sow` → `/proposal` → `/ceo-review` → `/client-review` → `/followup` → `/brief` → `/handoff`
 
 Use `/meeting` at any point after `/intake` to log additional founder meetings.
 
@@ -40,6 +41,7 @@ file and execute it as instructions.
 | Skill | File |
 |-------|------|
 | `/intake` | `~/.claude/skills/waleed-ai/skills/intake/SKILL.md` |
+| `/market` | `~/.claude/skills/waleed-ai/skills/market/SKILL.md` |
 | `/evaluate` | `~/.claude/skills/waleed-ai/skills/evaluate/SKILL.md` |
 | `/bop` | `~/.claude/skills/waleed-ai/skills/bop/SKILL.md` |
 | `/outreach` | `~/.claude/skills/waleed-ai/skills/outreach/SKILL.md` |
@@ -61,17 +63,18 @@ file and execute it as instructions.
   sessions/
     YYYY-MM-DD-founder/
       01-intake.md          ← /intake
-      02-evaluate.md        ← /evaluate  (re-run after /meeting to refresh score)
-      03-bop.md             ← /bop
-      04-outreach.md        ← /outreach  (first WhatsApp — sent before full doc suite)
-      05-prd.md             ← /prd
-      06-sow.md             ← /sow
-      07-proposal.md        ← /proposal
-      08-ceo-review.md      ← /ceo-review
-      09-client-review.md   ← /client-review
-      10-followup.md        ← /followup
-      11-brief.md           ← /brief
-      12-handoff.md         ← /handoff  (only after Outcome: Proceed)
+      02-market.md          ← /market   (optional; run before /evaluate)
+      03-evaluate.md        ← /evaluate  (re-run after /meeting to refresh score)
+      04-bop.md             ← /bop
+      05-outreach.md        ← /outreach  (first WhatsApp — sent before full doc suite)
+      06-prd.md             ← /prd
+      07-sow.md             ← /sow
+      08-proposal.md        ← /proposal
+      09-ceo-review.md      ← /ceo-review
+      10-client-review.md   ← /client-review
+      11-followup.md        ← /followup
+      12-brief.md           ← /brief
+      13-handoff.md         ← /handoff  (only after Outcome: Proceed)
       meetings/
         YYYY-MM-DD.md       ← /meeting  (one file per additional meeting)
 ```
@@ -84,7 +87,7 @@ When you meet a founder more than once:
 2. Before the second meeting: run `/brief` to prep.
 3. After the second meeting: run `/meeting` to log new information.
 4. Re-run `/evaluate` — it will detect the `meetings/` folder and incorporate new data,
-   producing an updated `02-evaluate.md` (clearly marked as a revision).
+   producing an updated `03-evaluate.md` (clearly marked as a revision).
 5. If the evaluation score or conditions changed, re-run `/bop` and `/ceo-review` to
    update Samir's brief before sending `/followup`.
 

@@ -14,7 +14,7 @@ allowed-tools:
 ## When to invoke this skill
 
 Run after `/bop`. Produces a first-contact Arabic WhatsApp message to the founder at
-`09-outreach.md`. This is the first formal correspondence after the internal evaluation.
+`05-outreach.md`. This is the first formal correspondence after the internal evaluation.
 
 The message is formal MSA Arabic, 3–4 short paragraphs, copy-paste ready for WhatsApp.
 An English version follows for Waleed's reference.
@@ -32,8 +32,8 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-if [ ! -f "$SESSION/03-bop.md" ]; then
-  echo "ERROR: 03-bop.md not found — run /bop first"; exit 1
+if [ ! -f "$SESSION/04-bop.md" ]; then
+  echo "ERROR: 04-bop.md not found — run /bop first"; exit 1
 fi
 echo "SESSION: $SESSION"
 ```
@@ -47,7 +47,7 @@ You are running the `/outreach` skill for Waleed Al-Sanosi, PM at Dreamy.
 ### Step 1: Read inputs
 
 Read from the current session:
-- `03-bop.md` — Business Opportunity Profile (company, founder, product, next steps)
+- `04-bop.md` — Business Opportunity Profile (company, founder, product, next steps)
 
 ### Step 2: Craft the outreach
 
@@ -63,9 +63,9 @@ Rules:
 - Closing: "مع خالص التحيات،\nوليد الأحمد السنوسي\nDreamy"
 - Do not make equity or partnership commitments in this message — this is first contact
 
-### Step 3: Write 04-outreach.md
+### Step 3: Write 05-outreach.md
 
-Write to `{SESSION}/04-outreach.md`:
+Write to `{SESSION}/05-outreach.md`:
 
 ```markdown
 # First Outreach Message
@@ -141,7 +141,7 @@ After writing the file, print:
 ```
 /outreach complete.
 
-File: {session path}/04-outreach.md
+File: {session path}/05-outreach.md
 
 The Arabic section above is copy-paste ready for WhatsApp.
 ```

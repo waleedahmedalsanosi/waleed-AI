@@ -14,7 +14,7 @@ allowed-tools:
 ## When to invoke this skill
 
 Run before a follow-up call with the founder. Reads the original intake and the
-follow-up correspondence to produce a concise internal meeting prep note at `11-brief.md`.
+follow-up correspondence to produce a concise internal meeting prep note at `12-brief.md`.
 
 Audience: Waleed only. Format: bullet-point brief with context recap, open questions,
 and suggested talking points. Should take 3 minutes to read before jumping on a call.
@@ -32,13 +32,13 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-for F in "01-intake.md" "10-followup.md"; do
+for F in "01-intake.md" "11-followup.md"; do
   if [ ! -f "$SESSION/$F" ]; then
     echo "ERROR: $F not found — run the preceding skill first"; exit 1
   fi
 done
 # Extract outcome from followup for context
-OUTCOME=$(grep "^Outcome:" "$SESSION/10-followup.md" | tail -1 | sed 's/Outcome: //')
+OUTCOME=$(grep "^Outcome:" "$SESSION/11-followup.md" | tail -1 | sed 's/Outcome: //')
 echo "SESSION: $SESSION"
 echo "OUTCOME: $OUTCOME"
 ```
@@ -55,11 +55,11 @@ a call. No formal register. Direct. Useful. What you'd actually want to know.
 ### Step 1: Read inputs
 
 1. `01-intake.md` — original Founder Brief (the context from the first meeting)
-2. `10-followup.md` — follow-up correspondence (what was sent, what the current status is)
+2. `11-followup.md` — follow-up correspondence (what was sent, what the current status is)
 
-### Step 2: Write 11-brief.md
+### Step 2: Write 12-brief.md
 
-Write to `{SESSION}/11-brief.md`:
+Write to `{SESSION}/12-brief.md`:
 
 ```markdown
 # Meeting Prep Brief
@@ -171,5 +171,5 @@ After writing the file, print:
 ```
 /brief complete.
 
-File: {session path}/11-brief.md
+File: {session path}/12-brief.md
 ```

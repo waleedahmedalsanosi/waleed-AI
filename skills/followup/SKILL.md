@@ -13,8 +13,8 @@ allowed-tools:
 
 ## When to invoke this skill
 
-Run after `/ceo-review`. Reads Samir's decision from `08-ceo-review.md` and produces
-the appropriate follow-up correspondence to the founder at `10-followup.md`.
+Run after `/ceo-review`. Reads Samir's decision from `09-ceo-review.md` and produces
+the appropriate follow-up correspondence to the founder at `11-followup.md`.
 
 The message branches on Samir's outcome:
 - **Proceed** → positive follow-up with next steps and meeting request
@@ -34,13 +34,13 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-if [ ! -f "$SESSION/08-ceo-review.md" ]; then
-  echo "ERROR: 08-ceo-review.md not found — run /ceo-review first"; exit 1
+if [ ! -f "$SESSION/09-ceo-review.md" ]; then
+  echo "ERROR: 09-ceo-review.md not found — run /ceo-review first"; exit 1
 fi
 # Read the outcome field from the last line of ceo-review.md
-OUTCOME=$(grep "^Outcome:" "$SESSION/08-ceo-review.md" | tail -1 | sed 's/Outcome: //')
+OUTCOME=$(grep "^Outcome:" "$SESSION/09-ceo-review.md" | tail -1 | sed 's/Outcome: //')
 if [ -z "$OUTCOME" ]; then
-  echo "ERROR: No 'Outcome:' line found in 08-ceo-review.md — re-run /ceo-review"; exit 1
+  echo "ERROR: No 'Outcome:' line found in 09-ceo-review.md — re-run /ceo-review"; exit 1
 fi
 echo "SESSION: $SESSION"
 echo "OUTCOME: $OUTCOME"
@@ -54,7 +54,7 @@ You are running the `/followup` skill for Waleed Al-Sanosi, PM at Dreamy.
 
 ### Step 1: Read inputs
 
-1. Read `08-ceo-review.md` from the current session.
+1. Read `09-ceo-review.md` from the current session.
 2. Note the `OUTCOME` from the bash preamble — this determines the letter tone.
 3. Also read `01-intake.md` for founder name and company name.
 
@@ -75,9 +75,9 @@ Write a formal, respectful decline. Thank the founder for their time, acknowledg
 specific and genuine from the pitch, and close the door politely — leaving it open for future
 re-engagement if the situation changes. Tone: warm, honest, respectful. No false encouragement.
 
-### Step 3: Write 10-followup.md
+### Step 3: Write 11-followup.md
 
-Write to `{SESSION}/10-followup.md`:
+Write to `{SESSION}/11-followup.md`:
 
 ```markdown
 # Follow-up Correspondence
@@ -183,7 +183,7 @@ After writing the file, print:
 /followup complete.
 
 Outcome: {Proceed / Conditional / Pass}
-File: {session path}/10-followup.md
+File: {session path}/11-followup.md
 
 The Arabic section is copy-paste ready for WhatsApp.
 {If Proceed or Conditional: "Next: run /brief for your meeting prep."}

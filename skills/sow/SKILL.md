@@ -29,12 +29,12 @@ SESSION=$(cat "$SESSION_FILE")
 if [ ! -d "$SESSION" ]; then
   echo "ERROR: session folder missing: $SESSION — re-run /intake"; exit 1
 fi
-if [ ! -f "$SESSION/05-prd.md" ]; then
-  echo "ERROR: 05-prd.md not found — run /prd first"; exit 1
+if [ ! -f "$SESSION/06-prd.md" ]; then
+  echo "ERROR: 06-prd.md not found — run /prd first"; exit 1
 fi
-FIRST_LINE=$(head -1 "$SESSION/05-prd.md" 2>/dev/null)
+FIRST_LINE=$(head -1 "$SESSION/06-prd.md" 2>/dev/null)
 if [ "$FIRST_LINE" != "# Product Requirements Document" ]; then
-  echo "ERROR: 05-prd.md is empty or malformed — re-run /prd"; exit 1
+  echo "ERROR: 06-prd.md is empty or malformed — re-run /prd"; exit 1
 fi
 echo "SESSION: $SESSION"
 ```
@@ -48,7 +48,7 @@ You are running the `/sow` skill for Waleed Al-Sanosi, PM at Dreamy.
 ### Step 1: Read inputs
 
 Read from the current session:
-- `05-prd.md` — the Product Requirements Document (scope, features, timeline)
+- `06-prd.md` — the Product Requirements Document (scope, features, timeline)
 
 Also use what you know about Dreamy's standard engagement model:
 - Dreamy provides: technical co-founding (product + engineering), 2-year commitment
@@ -56,9 +56,9 @@ Also use what you know about Dreamy's standard engagement model:
 - Dreamy does NOT charge cash fees in the equity-for-services model
 - Typical engagement: 2 Dreamy team members embedded with the startup
 
-### Step 2: Write 06-sow.md
+### Step 2: Write 07-sow.md
 
-Write to `{SESSION}/06-sow.md`:
+Write to `{SESSION}/07-sow.md`:
 
 ```markdown
 # Scope of Work
@@ -226,7 +226,7 @@ After writing the file, print:
 ```
 /sow complete.
 
-File: {session path}/06-sow.md
+File: {session path}/07-sow.md
 
 ⚠ Reminder: Fill in the equity percentage before sending to founder.
 
