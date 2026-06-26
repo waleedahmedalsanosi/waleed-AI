@@ -8,13 +8,17 @@ allowed-tools:
   - Read
   - Write
   - Bash
+  - mcp__Tactiq__search_meetings
+  - mcp__Tactiq__get_meeting
+  - mcp__Tactiq__get_meeting_artifact
+  - mcp__Tactiq__list_recent_meetings
 ---
 
 ## When to invoke this skill
 
-Run at the start of every new founder evaluation cycle. Takes a raw meeting transcript
-(pasted inline or as a file path) and produces a structured Founder Brief at
-`~/.waleed-ai/sessions/{YYYY-MM-DD-founder}/01-intake.md`.
+Run at the start of every new founder evaluation cycle. Searches Tactiq first for
+existing recordings of this founder, then falls back to a pasted transcript or file path.
+Produces a structured Founder Brief at `~/.waleed-ai/sessions/{YYYY-MM-DD-founder}/01-intake.md`.
 
 This skill creates the session folder and sets `.current-session`. All downstream skills
 depend on this file. Run it first, every time.
@@ -35,11 +39,60 @@ echo "CURRENT_DATE: $(date +%Y-%m-%d)"
 
 You are running the `/intake` skill for Waleed Al-Sanosi, PM at Dreamy (dreamybuilders.com).
 
-### Step 1: Determine transcript source
+### Step 0: Search Tactiq for existing meeting recordings
+
+The user has provided a founder name (e.g., "intake Faisal Al-Harbi"). Before asking for
+a transcript, check whether Tactiq already has a recording from this meeting.
+
+1. Extract the founder's name from the user's message (everything after the trigger word "intake").
+2. Call `mcp__Tactiq__search_meetings` with:
+   - `participants`: the founder's name (first name, last name, or full name — try the most specific form first)
+   - `limit`: 10
+   - Do NOT put the founder's name in `query` — use `participants` only.
+
+3. If meetings are found, display them clearly:
+
+```
+Found {N} Tactiq meeting(s) for {Founder Name}:
+
+  1. {title} — {date} ({duration if available})
+     Participants: {participants list}
+  2. {title} — {date} ({duration if available})
+     Participants: {participants list}
+  ...
+
+Which meeting is the intake? (Enter number, or "all" to combine, or "none" to paste transcript)
+```
+
+4. Wait for Waleed's response:
+   - Number (e.g., "1"): use that meeting
+   - "all": pull all listed meetings and combine their content
+   - "none" or no Tactiq meetings found: fall through to Step 1 (file/paste)
+
+5. For each selected meeting, call `mcp__Tactiq__get_meeting(id)`:
+   - Use `detailedSummary.content` as the transcript content if present
+   - If `detailedSummary` is unavailable (requires Team plan), call `mcp__Tactiq__list_meeting_artifacts(meetingId)` and then `mcp__Tactiq__get_meeting_artifact(meetingId, artifactId)` for any summary or notes artifact
+   - If no content is retrievable at all, tell Waleed: "Tactiq returned this meeting but its content is not accessible — paste the transcript or provide a file path."
+
+6. If multiple meetings were selected ("all"), concatenate their content in chronological order,
+   separating with `--- Meeting {N}: {title} ({date}) ---`.
+
+7. Set `TRANSCRIPT_SOURCE = "Tactiq: {title} ({date})"` for use in Step 4.
+
+---
+
+### Step 1: Determine transcript source (fallback if Tactiq has no match)
+
+Skip this step if Step 0 found and retrieved content from Tactiq.
 
 Look at the user's message. After the trigger word ("intake") and the founder's name:
 - If the next token starts with `~/` or `/` — treat it as a file path. Use the Read tool to read that file. That is the transcript.
 - Otherwise — the transcript is everything the user pasted in their message after the founder name. Read from the chat context.
+- If no file path and no pasted content: ask Waleed to paste the transcript or provide a file path.
+
+Set `TRANSCRIPT_SOURCE = "file: {path}"` or `"pasted text"`.
+
+---
 
 ### Step 2: Generate the session slug
 
@@ -82,6 +135,7 @@ Produce the following document and write it to `$SESSION/01-intake.md`:
 **Session:** {slug}
 **Date:** {YYYY-MM-DD}
 **Interviewer:** Waleed Al-Sanosi, Dreamy
+**Transcript source:** {TRANSCRIPT_SOURCE from Step 0 or Step 1}
 
 ---
 
@@ -179,6 +233,7 @@ After writing the file, print:
 
 Session: {slug}
 File: {session path}/01-intake.md
+Transcript source: {Tactiq meeting title / file path / pasted text}
 
 Next: run /evaluate
 ```
